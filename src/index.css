@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f3ead8;
+  --color-cream-2: #ede2cc;
+  --color-espresso: #211408;
+  --color-yolk: #f5a40b;
+  --color-flame: #e4590e;
+  --color-shell: #d9c6a5;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-serif2: "Instrument Serif", Georgia, serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  font-family: var(--font-display);
+  background:
+    radial-gradient(1200px 800px at 78% -12%, rgba(245, 164, 11, 0.2), transparent 60%),
+    radial-gradient(900px 720px at -12% 38%, rgba(228, 89, 14, 0.12), transparent 55%),
+    linear-gradient(180deg, #f3ead8 0%, #efe4ce 100%);
+  background-attachment: fixed;
+  color: #211408;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #e4590e;
+  color: #f7efe0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(33, 20, 8, 0.55);
+  border-radius: 999px;
+  border: 2px solid #efe4ce;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Outlined display text */
+.text-outline {
+  -webkit-text-stroke: 2.5px #211408;
+  color: transparent;
+}
+@media (max-width: 768px) {
+  .text-outline {
+    -webkit-text-stroke-width: 1.4px;
+  }
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee-fast {
+  animation: marquee 14s linear infinite;
+}
+
+/* Floating */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-drift {
+  animation: drift 5s ease-in-out infinite;
+}
+
+/* Film grain */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Nav link underline */
+.hover-line {
+  position: relative;
+}
+.hover-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Scroll hint line */
+@keyframes scrollhint {
+  0% {
+    transform: translateY(-100%);
+  }
+  55% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scrollhint {
+  animation: scrollhint 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-fast,
+  .animate-scrollhint,
+  .animate-drift {
+    animation: none !important;
+  }
+}
+
+/* Short landscape screens — keep the hero headline inside the fold */
+@media (max-height: 520px) {
+  .hero-h1 {
+    font-size: 13.5vh !important;
+  }
+}
+
+/* Custom cursor — hide the native one on precise pointers */
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button,
+  input,
+  [data-cursor] {
+    cursor: none !important;
+  }
+}
+
+/* Concierge message scroll area */
+.concierge-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(33, 20, 8, 0.25) transparent;
+}
+.concierge-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.concierge-scroll::-webkit-scrollbar-thumb {
+  background: rgba(33, 20, 8, 0.25);
+  border-radius: 999px;
+  border: none;
+}
